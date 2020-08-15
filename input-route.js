@@ -9,7 +9,11 @@ let model;
 let encoder;
 (async function () {
     encoder = await ecoder.load();
+    console.log("ENCODER LOADING");
+    console.log(encoder);
     model = await tf.loadLayersModel('https://model-app-nodejs.herokuapp.com:' + port + '/model_1/model.json');
+    console.log("MODEL LOADING");
+    console.log(model);
 })();
 
 
