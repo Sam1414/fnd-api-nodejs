@@ -91,7 +91,8 @@ async function compute(url) {
     const sentences = [
         data.user_data.content,
         data.admin_data.content
-    ]
+    ];
+
     const emb = await encoder.embed(sentences);
     emb.print();
     const user_emb = tf.gatherND(emb, [[0][0]]);
