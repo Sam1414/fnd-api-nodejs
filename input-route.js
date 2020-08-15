@@ -5,15 +5,17 @@ const { response } = require('./app');
 const tf = require("@tensorflow/tfjs-node");
 const ecoder = require("@tensorflow-models/universal-sentence-encoder");
 
-let model;
 let encoder;
 (async function () {
     encoder = await ecoder.load();
-    console.log("ENCODER LOADING");
-    console.log(encoder);
-    model = await tf.loadLayersModel('https://model-app-nodejs.herokuapp.com:' + port + '/model_1/model.json');
+    console.log("ENCODER LOADED");
+})();
+
+let model;
+(async function () {
+    // model = await tf.loadLayersModel('file:///Users/LEGION/Downloads/Fake_News_Dataset/fnc-1-master/universal_emb/TensorFlowJS/local-server/model_1/model.json');
+    model = await tf.loadLayersModel('file:///app/model_1/model.json');
     console.log("MODEL LOADING");
-    console.log(model);
 })();
 
 
@@ -96,10 +98,8 @@ async function compute(url) {
         data.user_data.content,
         data.admin_data.content
     ];
-    // console.log(encoder);
-    const enc = encoder;
-    // console.log(enc);
-    const emb = await enc.embed(sentences);
+
+    const emb = await encoder.embed(sentences);
     emb.print();
     const user_emb = tf.gatherND(emb, [[0][0]]);
     const admin_emb = tf.gatherND(emb, [[1][0]]);
