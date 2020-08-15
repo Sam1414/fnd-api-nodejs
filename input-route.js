@@ -92,8 +92,10 @@ async function compute(url) {
         data.user_data.content,
         data.admin_data.content
     ];
-
-    const emb = await encoder.embed(sentences);
+    // console.log(encoder);
+    const enc = encoder;
+    // console.log(enc);
+    const emb = await enc.embed(sentences);
     emb.print();
     const user_emb = tf.gatherND(emb, [[0][0]]);
     const admin_emb = tf.gatherND(emb, [[1][0]]);
