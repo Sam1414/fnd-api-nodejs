@@ -8,9 +8,8 @@ const ecoder = require("@tensorflow-models/universal-sentence-encoder");
 let model;
 let encoder;
 (async function () {
-    // model = await tf.loadLayersModel('http://127.0.0.1:1501/tfjs-models/model_1/model.json');
-    model = await tf.loadLayersModel('https://model-app-nodejs.herokuapp.com/model_1/model.json');
     encoder = await ecoder.load();
+    model = await tf.loadLayersModel('https://model-app-nodejs.herokuapp.com:' + port + '/model_1/model.json');
 })();
 
 
